@@ -8,4 +8,5 @@ import javax.inject.Inject
 
 class TeamInteractor @Inject constructor(private val repository: ITeamRepository): TeamUseCase {
     override fun getData(): Flow<Resource<List<TeamModel>>> = repository.getData()
+    override fun isFavorite(teamModel: TeamModel): Flow<Boolean> = repository.isFavorite(teamModel)
 }

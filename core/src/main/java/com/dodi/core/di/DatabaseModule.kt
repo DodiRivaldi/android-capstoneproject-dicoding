@@ -3,6 +3,7 @@ package com.dodi.core.di
 import android.content.Context
 import androidx.room.Room
 import com.dodi.core.data.database.AppDatabase
+import com.dodi.core.data.repository.teams.local.FavoriteDao
 import com.dodi.core.data.repository.teams.local.TeamDao
 import dagger.Module
 import dagger.Provides
@@ -18,4 +19,7 @@ class DatabaseModule {
 
     @Provides
     fun provideTeamDao(database: AppDatabase): TeamDao = database.teamDao()
+
+    @Provides
+    fun provideFavoriteDao(database: AppDatabase): FavoriteDao = database.favoriteDao()
 }

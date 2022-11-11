@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface TeamUseCase {
     fun getData(): Flow<Resource<List<TeamModel>>>
+    fun isFavorite(teamModel: TeamModel): Flow<Boolean>
 }

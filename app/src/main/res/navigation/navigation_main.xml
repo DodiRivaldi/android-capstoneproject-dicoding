@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/movieFragment">
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.dodi.androidbaseproject.features.team.TeamFragment"
+        android:label="MovieFragment"
+        tools:layout="@layout/fragment_team" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.dodi.androidbaseproject.features.team.TeamFragment"
+        android:label="FavoriteFragment"
+        tools:layout="@layout/fragment_team" />
+</navigation>

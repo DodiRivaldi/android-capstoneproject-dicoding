@@ -1,6 +1,7 @@
 package com.dodi.core.abstraction.base
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -12,6 +13,7 @@ abstract class BaseAdapter<T : Any, VB : ViewDataBinding>(diffUtil: DiffUtil.Ite
     ListAdapter<T, BaseAdapter.Companion.BaseViewHolder<VB>>(diffUtil) {
 
     val items = mutableListOf<T>()
+    var listener: ((view: View, position: Int, item: T) -> Unit)? = null
 
     abstract fun getLayout(): Int
 

@@ -1,5 +1,7 @@
 package com.dodi.core.data.repository
 
+import com.dodi.core.data.repository.teams.local.FavoriteDao
+import com.dodi.core.data.repository.teams.local.FavoriteEntity
 import com.dodi.core.data.repository.teams.local.TeamDao
 import com.dodi.core.data.repository.teams.local.TeamEntity
 import kotlinx.coroutines.flow.Flow
@@ -7,7 +9,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LocalDataSource @Inject constructor(private val teamDao: TeamDao) {
+class LocalDataSource @Inject constructor(private val teamDao: TeamDao, private val favoriteDao: FavoriteDao) {
     fun getData(): Flow<List<TeamEntity>> = teamDao.get()
     suspend fun insert(item : List<TeamEntity>) = teamDao.insert(item)
+    suspend fun isFavorite(item : FavoriteEntity): Boolean =  favoriteDao.isExist(item.id)
 }

@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ITeamRepository {
     fun getData(): Flow<Resource<List<TeamModel>>>
-
+    fun isFavorite(teamModel: TeamModel): Flow<Boolean>
 }

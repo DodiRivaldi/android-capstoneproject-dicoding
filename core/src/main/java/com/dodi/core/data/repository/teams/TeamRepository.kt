@@ -9,6 +9,7 @@ import com.dodi.core.data.repository.LocalDataSource
 import com.dodi.core.data.repository.RemoteDataSource
 import com.dodi.core.data.repository.teams.remote.TeamResponse
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -38,4 +39,11 @@ class TeamRepository @Inject constructor(
             }
 
         }.asFlow()
+
+    override fun isFavorite(teamModel: TeamModel): Flow<Boolean> {
+        val teamEntity = TeamDataMapper.mapDomainToFavoriteEntity(teamModel)
+        return flow {
+            emit(localDataSource.isFavorite(teamEntity))
+        }
+    }
 }
