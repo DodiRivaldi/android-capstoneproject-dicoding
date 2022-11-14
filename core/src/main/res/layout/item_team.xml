@@ -37,7 +37,6 @@
                 android:layout_height="@dimen/poster_item_image_height"
                 android:contentDescription="@string/team_badge"
                 app:imageUrl="@{item.strTeamBadge.toString()}"
-                android:scaleType="centerCrop"
                 tools:src="@drawable/ic_loading" />
         </androidx.cardview.widget.CardView>
 
