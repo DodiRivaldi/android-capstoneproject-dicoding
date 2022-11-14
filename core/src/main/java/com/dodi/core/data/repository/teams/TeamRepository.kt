@@ -1,5 +1,8 @@
 package com.dodi.core.data.repository.teams
 
+import androidx.lifecycle.LiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.dodi.core.abstraction.utils.AppExecutors
 import com.dodi.core.data.NetworkBoundResource
 import com.dodi.core.data.Resource
@@ -45,5 +48,24 @@ class TeamRepository @Inject constructor(
         return flow {
             emit(localDataSource.isFavorite(teamEntity))
         }
+    }
+
+    override fun getFavorite(): LiveData<PagedList<TeamModel>> {
+        val items = localDataSource.getFavoriteTeam().map {
+            TeamDataMapper.mapFavoriteEntityToDomain(it)
+        }
+
+        val paged = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(2)
+            .setPageSize(2)
+            .build()
+
+        return LivePagedListBuilder(items,paged).build()
+    }
+
+    override fun insertFavorite(teamModel: TeamModel, state: Boolean) {
+        val item = TeamDataMapper.mapDomainToFavoriteEntity(teamModel)
+        appExecutors.diskIO().execute { localDataSource.insertFavoriteTeam(item,state) }
     }
 }

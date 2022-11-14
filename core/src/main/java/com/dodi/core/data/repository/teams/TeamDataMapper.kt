@@ -54,6 +54,24 @@ object TeamDataMapper {
             )
         }
 
+    fun mapFavoriteEntityToDomain(it: FavoriteEntity) = TeamModel(
+        id = it.id,
+        strTeam = it.strTeam,
+        strTeamShort = it.strTeamShort,
+        strAlternate = it.strAlternate,
+        strStadium = it.strStadium,
+        strKeywords = it.strKeywords,
+        strStadiumThumb = it.strStadiumThumb,
+        strStadiumDescription = it.strStadiumDescription,
+        strStadiumLocation = it.strStadiumLocation,
+        intStadiumCapacity = it.intStadiumCapacity,
+        strDescriptionEN = it.strDescriptionEN,
+        strTeamBadge = it.strTeamBadge,
+        strTeamJersey = it.strTeamJersey,
+        strTeamLogo = it.strTeamLogo,
+        strTeamBanner = it.strTeamBanner
+    )
+
     fun mapDomainToFavoriteEntity(it: TeamModel) = FavoriteEntity(
         id = it.id,
         strTeam = it.strTeam,
