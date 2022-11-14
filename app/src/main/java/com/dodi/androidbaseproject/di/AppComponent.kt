@@ -1,5 +1,6 @@
 package com.dodi.androidbaseproject.di
 
+import com.dodi.androidbaseproject.features.detail.DetailActivity
 import com.dodi.androidbaseproject.features.main.MainActivity
 import com.dodi.androidbaseproject.features.team.TeamFragment
 import com.dodi.core.di.CoreComponent
@@ -21,4 +22,5 @@ interface AppComponent {
     //inject setiap activity maupun fragment disini
     fun inject(activity: MainActivity)
     fun inject(fragment: TeamFragment)
+    fun inject(activity: DetailActivity)
 }
