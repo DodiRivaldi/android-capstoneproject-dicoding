@@ -11,13 +11,9 @@ interface FavoriteDao {
     @Delete
     fun delete(data: FavoriteEntity)
 
-    //Movie item has title
     @Query("select * from favorite_team where strTeam != ''")
-    fun getFavoriteMovies(): DataSource.Factory<Int, FavoriteEntity>
+    fun get(): DataSource.Factory<Int, FavoriteEntity>
 
-    //Tv show item has title
-    @Query("select * from favorite_team where strTeam != ''")
-    fun getFavoriteTvShows(): DataSource.Factory<Int, FavoriteEntity>
 
     @Query("SELECT EXISTS (SELECT 1 FROM favorite_team WHERE id = :id)")
     suspend fun isExist(id: String): Boolean

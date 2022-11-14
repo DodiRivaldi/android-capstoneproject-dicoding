@@ -23,7 +23,7 @@ class TeamRepository @Inject constructor(
     override fun getData(): Flow<Resource<List<TeamModel>>> =
         object : NetworkBoundResource<List<TeamModel>, List<TeamResponse.TeamList>>() {
             override fun loadFromDb(): Flow<List<TeamModel>> {
-                return localDataSource.getData().map {
+                return localDataSource.getTeams().map {
                     TeamDataMapper.mapTeamEntityToDomain(it)
                 }
             }
@@ -35,7 +35,7 @@ class TeamRepository @Inject constructor(
 
             override suspend fun saveCallResult(data: List<TeamResponse.TeamList>) {
                 val itemList = TeamDataMapper.mapTeamResponseToEntity(data)
-                localDataSource.insert(itemList)
+                localDataSource.insertTeam(itemList)
             }
 
         }.asFlow()
