@@ -7,4 +7,6 @@
     <string name="favorite">Favorite</string>
     <string name="error_message">Error</string>
     <string name="search">Search</string>
+    <string name="background">Background</string>
+    <string name="desc">Description</string>
 </resources>

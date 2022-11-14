@@ -14,6 +14,7 @@ import com.dodi.androidbaseproject.MyApp
 import com.dodi.androidbaseproject.R
 import com.dodi.androidbaseproject.databinding.FragmentTeamBinding
 import com.dodi.androidbaseproject.features.ViewModelFactory
+import com.dodi.androidbaseproject.features.detail.DetailActivity
 import com.dodi.core.abstraction.base.BaseFragment
 import com.dodi.core.abstraction.utils.gone
 import com.dodi.core.abstraction.utils.observe
@@ -35,12 +36,6 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>({FragmentTeamBinding.infl
         binding?.apply {
             rvTeam.adapter = this@TeamFragment.adapter
             rvTeam.hasFixedSize()
-            rvTeam.addOnScrollListener(object  : RecyclerView.OnScrollListener(){
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    appbar.isSelected = recyclerView.canScrollVertically(-1)
-                }
-            })
             search.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(p0: String?): Boolean {
                     lifecycleScope.launch {
@@ -60,7 +55,7 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>({FragmentTeamBinding.infl
             adapter.lifecycleOwner = this@TeamFragment
             adapter.viewModel = this@TeamFragment.viewModel
             adapter.listener = {_, _, item ->
-                //to detail act             DetailActivity.navigate(requireActivity(), item)
+                DetailActivity.navigate(requireActivity(), item)
             }
             adapter.favoriteListener = {item, isFavorite ->
               //            viewModel.setToFavorite(item, isFavorite)

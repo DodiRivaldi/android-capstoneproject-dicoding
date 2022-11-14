@@ -28,7 +28,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-           // applicationIdSuffix ".debug"
+            // applicationIdSuffix ".debug"
             debuggable true
         }
 
@@ -36,7 +36,7 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'BASE_URL', BASE_URL
     }
-    buildFeatures{
+    buildFeatures {
         dataBinding true
         viewBinding true
     }
@@ -53,7 +53,4 @@ dependencies {
 
     implementation project(":core")
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    /*  implementation 'androidx.appcompat:appcompat:1.5.1'
-      implementation 'com.google.android.material:material:1.4.0'
-      implementation 'androidx.constraintlayout:constraintlayout:2.1.4'*/
 }
