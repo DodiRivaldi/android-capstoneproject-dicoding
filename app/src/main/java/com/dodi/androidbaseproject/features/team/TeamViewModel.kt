@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class TeamViewModel @Inject constructor(private val useCase: TeamUseCase?) : ViewModel() {
 
-    fun getTeamData() = useCase?.getData()?.asLiveData()
+    fun getTeamData() = useCase?.getTeams()?.asLiveData()
     fun isFavorite(teamModel: TeamModel) = useCase?.isFavorite(teamModel)?.asLiveData()
 
     val queryChannel = BroadcastChannel<String>(Channel.CONFLATED)
