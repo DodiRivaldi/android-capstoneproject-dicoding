@@ -22,7 +22,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>({ActivityDetailBindin
     private val viewModel : DetailViewModel by viewModels { factory }
 
     companion object{
-        private const val EXTRA_DATA = "key.EXTRA_DATA"
+        private const val EXTRA_DATA = "EXTRA_DATA"
 
         fun navigate(activity: Activity, teamModel: TeamModel){
             Intent(activity, DetailActivity::class.java).apply {
@@ -36,7 +36,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>({ActivityDetailBindin
     @ExperimentalCoroutinesApi
     override fun ActivityDetailBinding.oncreate(savedInstanceState: Bundle?) {
         (application as MyApp).appComponent.inject(this@DetailActivity)
-//        setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowTitleEnabled(false)
