@@ -9,7 +9,7 @@
 
     <item
         android:bottom="10dp"
-        android:drawable="@drawable/ic_film_black"
+        android:drawable="@drawable/ic_epl"
         android:left="10dp"
         android:right="10dp"
         android:top="10dp" />

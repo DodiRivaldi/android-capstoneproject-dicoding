@@ -1,5 +1,7 @@
 package com.dodi.androidbaseproject.features.main
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.NavController
@@ -9,6 +11,7 @@ import com.dodi.androidbaseproject.MyApp
 import com.dodi.androidbaseproject.R
 import com.dodi.androidbaseproject.databinding.ActivityMainBinding
 import com.dodi.androidbaseproject.features.ViewModelFactory
+import com.dodi.androidbaseproject.features.detail.DetailActivity
 import com.dodi.core.abstraction.base.BaseActivity
 import com.dodi.core.abstraction.utils.gone
 import com.dodi.core.abstraction.utils.observe
@@ -34,5 +37,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>({ ActivityMainBinding.inf
 
     override fun observerViewModel() {
 
+    }
+
+    companion object{
+        fun navigate(activity: Activity){
+            Intent(activity, MainActivity::class.java).apply {
+                activity.startActivity(this)
+            }
+        }
     }
 }
