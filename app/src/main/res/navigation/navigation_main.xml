@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_team" />
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.dodi.androidbaseproject.features.team.TeamFragment"
+        android:name="com.dodi.androidbaseproject.favorite.features.FavoriteFragment"
         android:label="FavoriteFragment"
-        tools:layout="@layout/fragment_team" />
+        tools:layout="@layout/fragment_favorite" />
 </navigation>
