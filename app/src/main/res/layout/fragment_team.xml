@@ -39,13 +39,13 @@
             app:spanCount="2"
             tools:listitem="@layout/item_team" />
 
-        <include
-            android:id="@+id/loading"
-            layout="@layout/_partial_loading"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <ProgressBar
+            android:id="@+id/pb_team"
+            android:layout_width="wrap_content"
+            tools:visibility="gone"
             android:layout_gravity="center"
-            tools:visibility="gone" />
+            android:layout_height="wrap_content"/>
+
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/errorLayout"

@@ -13,16 +13,6 @@ class TeamViewModel @Inject constructor(private val useCase: TeamUseCase?) : Vie
 
     fun getTeamData() = useCase?.getTeams()?.asLiveData()
     fun isFavorite(teamModel: TeamModel) = useCase?.isFavorite(teamModel)?.asLiveData()
-
-    val queryChannel = BroadcastChannel<String>(Channel.CONFLATED)
-    val search = queryChannel.asFlow()
-        .debounce(1000)
-        .distinctUntilChanged()
-        .filter {
-            it.trim().isNotEmpty()
-        }
-        .mapLatest {
-            //useCase?.searchMovies(it)
-        }
-        .asLiveData()
+    fun insertFavorite(teamModel: TeamModel, state : Boolean) = useCase?.insertFavorite(teamModel, state)
+    fun searchTeams(query : String) = useCase?.searchTeams(query)?.asLiveData()
 }

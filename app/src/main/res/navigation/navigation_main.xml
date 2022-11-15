@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/teamFragment"
         android:name="com.dodi.androidbaseproject.features.team.TeamFragment"
-        android:label="MovieFragment"
+        android:label="TeamFragment"
         tools:layout="@layout/fragment_team" />
     <fragment
         android:id="@+id/favoriteFragment"

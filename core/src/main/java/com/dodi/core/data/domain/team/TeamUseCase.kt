@@ -11,4 +11,5 @@ interface TeamUseCase {
     fun isFavorite(teamModel: TeamModel): Flow<Boolean>
     fun getFavorite(): LiveData<PagedList<TeamModel>>
     fun insertFavorite(teamModel: TeamModel, state : Boolean)
+    fun searchTeams(query : String): Flow<List<TeamModel>>
 }

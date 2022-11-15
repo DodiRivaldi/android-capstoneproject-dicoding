@@ -2,16 +2,13 @@ package com.dodi.androidbaseproject.features.team
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.SearchView
+import android.util.Log
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
 import com.dodi.androidbaseproject.MyApp
 import com.dodi.androidbaseproject.R
+import androidx.appcompat.widget.SearchView
 import com.dodi.androidbaseproject.databinding.FragmentTeamBinding
 import com.dodi.androidbaseproject.features.ViewModelFactory
 import com.dodi.androidbaseproject.features.detail.DetailActivity
@@ -36,18 +33,21 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>({FragmentTeamBinding.infl
         binding?.apply {
             rvTeam.adapter = this@TeamFragment.adapter
             rvTeam.hasFixedSize()
-            search.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(p0: String?): Boolean {
-                    lifecycleScope.launch {
+                   /* lifecycleScope.launch {
                         viewModel.queryChannel.send(p0.toString())
-                    }
+                    }*/
+                    observe(viewModel.searchTeams(p0.toString()), ::handleSearch)
                     return true
                 }
 
                 override fun onQueryTextChange(p0: String?): Boolean {
-                    lifecycleScope.launch {
+                   /* lifecycleScope.launch {
                         viewModel.queryChannel.send(p0.toString())
-                    }
+                    }*/
+                    observe(viewModel.searchTeams(p0.toString()), ::handleSearch)
+
                     return true
                 }
             })
@@ -58,70 +58,53 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>({FragmentTeamBinding.infl
                 DetailActivity.navigate(requireActivity(), item)
             }
             adapter.favoriteListener = {item, isFavorite ->
-              //            viewModel.setToFavorite(item, isFavorite)
-            }
-            adapter.shareListener = {
-                // to share act requireActivity().shareMovieTv(it)
+                viewModel.insertFavorite(item, isFavorite)
             }
         }
     }
 
 
     override fun observeViewModel() {
-        observe(viewModel.getTeamData(), ::handleMovies)
+        observe(viewModel.getTeamData(), ::handleteams)
     }
 
-    private fun handleMovies(movies: Resource<List<TeamModel>>) {
+    private fun handleteams(teams: Resource<List<TeamModel>>) {
         binding?.apply {
-            when (movies) {
+            when (teams) {
                 is Resource.Loading -> {
                     errorLayout.gone()
-                    loading.root.visible()
+                    pbTeam.visible()
                 }
                 is Resource.Success -> {
-                    loading.root.gone()
+                    pbTeam.gone()
                     errorLayout.gone()
-                    adapter.submitList(movies.data)
+                    adapter.submitList(teams.data)
                 }
                 is Resource.Error -> {
-                    loading.root.gone()
-                    if (movies.data.isNullOrEmpty()) {
+                    pbTeam.gone()
+                    if (teams.data.isNullOrEmpty()) {
                         errorLayout.visible()
                        error.message.text =
-                            movies.message ?: getString(R.string.error_message)
+                            teams.message ?: getString(R.string.error_message)
                     } else {
                         requireContext().showToast(getString(R.string.error_message))
-                        adapter.submitList(movies.data)
+                        adapter.submitList(teams.data)
                     }
                 }
             }
         }
     }
 
-    private fun handleSearch(movies: Resource<List<TeamModel>>) {
-        binding?.apply {
-            when (movies) {
-                is Resource.Loading -> {
-                    errorLayout.gone()
-                    loading.root.visible()
-                }
-                is Resource.Success -> {
-                    loading.root.gone()
-                    errorLayout.gone()
-                    adapter.submitList(movies.data)
-                }
-                is Resource.Error -> {
-                    loading.root.gone()
-                    if (movies.data.isNullOrEmpty()) {
-                        errorLayout.visible()
-                        error.message.text =
-                            movies.message ?: getString(R.string.error_message)
-                    } else {
-                        requireContext().showToast(getString(R.string.error_message))
-                        adapter.submitList(movies.data)
-                    }
-                }
-            }
+    private fun handleSearch(teams: List<TeamModel>) {
+        Log.d("HASILNYA",teams.size.toString())
+
+        if (!teams.isNullOrEmpty()){
+            adapter.submitList(teams)
+            Log.d("HASIL",teams.size.toString())
+
+        }else{
+            Log.d("HASILKOSONG",teams.size.toString())
+            requireContext().showToast(R.string.error_message.toString())
         }
     }
 

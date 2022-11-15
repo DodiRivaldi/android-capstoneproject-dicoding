@@ -16,7 +16,6 @@ class TeamAdapter : BaseAdapter<TeamModel, ItemTeamBinding>(
     lateinit var lifecycleOwner: LifecycleOwner
 
     var favoriteListener: ((item: TeamModel, isFavorite: Boolean) -> Unit)? = null
-    var shareListener: ((item: TeamModel) -> Unit)? = null
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TeamModel>() {
@@ -57,7 +56,6 @@ class TeamAdapter : BaseAdapter<TeamModel, ItemTeamBinding>(
                     executePendingBindings()
                 }
             }
-            binding.btnShare.setOnClickListener { shareListener?.invoke(item) }
             binding.apply {
                 setVariable(BR.item, item)
                 executePendingBindings()

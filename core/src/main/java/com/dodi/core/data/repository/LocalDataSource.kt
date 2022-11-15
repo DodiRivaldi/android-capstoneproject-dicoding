@@ -19,4 +19,5 @@ class LocalDataSource @Inject constructor(private val teamDao: TeamDao, private 
         else favoriteDao.delete(team)
     }
     fun getFavoriteTeam(): DataSource.Factory<Int, FavoriteEntity> = favoriteDao.get()
+    fun searchTeams(query : String): Flow<List<TeamEntity>> = teamDao.searchTeam(query)
 }

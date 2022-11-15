@@ -38,12 +38,13 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>({ActivityDetailBindin
         (application as MyApp).appComponent.inject(this@DetailActivity)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
-            setDisplayShowTitleEnabled(false)
+            setDisplayShowTitleEnabled(true)
         }
         val items = intent.getParcelableExtra<TeamModel>(EXTRA_DATA)
         items?.let {
             viewModel.setSelected(it)
         }
+        supportActionBar?.title = items?.strTeam
     }
 
     override fun onSupportNavigateUp(): Boolean {

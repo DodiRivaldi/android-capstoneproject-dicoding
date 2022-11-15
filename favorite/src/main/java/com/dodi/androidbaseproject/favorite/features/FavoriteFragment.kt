@@ -39,15 +39,15 @@ class FavoriteFragment :
     private fun favoriteItems(teams : PagedList<TeamModel>){
         if (!teams.isNullOrEmpty()){
             binding?.emptyFavorite?.root?.gone()
-            binding?.rvFavoriteMovie?.isVisible
+            binding?.rvFavoriteTeam?.isVisible
             adapter.submitList(teams)
         }else{
             binding?.emptyFavorite?.root?.visible()
-            binding?.rvFavoriteMovie?.gone()
+            binding?.rvFavoriteTeam?.gone()
         }
     }
     override fun FragmentFavoriteBinding.onViewCreated(savedInstanceState: Bundle?) {
-        binding?.rvFavoriteMovie?.adapter = this@FavoriteFragment.adapter
+        binding?.rvFavoriteTeam?.adapter = this@FavoriteFragment.adapter
         adapter.lifecycleOwner = this@FavoriteFragment
         adapter.viewModel = this@FavoriteFragment.viewModel
         adapter.listener = {_,_,items->
@@ -55,15 +55,6 @@ class FavoriteFragment :
         }
         adapter.favoriteListener = {items, state ->
             viewModel.insertFavorite(items,state)
-            binding?.apply {
-                Snackbar.make(root,getString(R.string.success_deleted_item_favorite), Snackbar.LENGTH_SHORT).apply {
-                    setAction(getString(R.string.cancel)){
-                        viewModel.insertFavorite(items,false)
-                    }
-                    show()
-                }
-                adapter.shareListner = { }
-            }
         }
     }
 

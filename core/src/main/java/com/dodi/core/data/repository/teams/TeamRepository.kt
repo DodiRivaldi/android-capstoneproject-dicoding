@@ -68,4 +68,10 @@ class TeamRepository @Inject constructor(
         val item = TeamDataMapper.mapDomainToFavoriteEntity(teamModel)
         appExecutors.diskIO().execute { localDataSource.insertFavoriteTeam(item,state) }
     }
+
+    override fun searchTeams(query: String): Flow<List<TeamModel>> = flow {
+        localDataSource.searchTeams(query).map {
+            TeamDataMapper.mapTeamEntityToDomain(it)
+        }
+    }
 }

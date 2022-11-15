@@ -13,4 +13,5 @@ class TeamInteractor @Inject constructor(private val repository: ITeamRepository
     override fun isFavorite(teamModel: TeamModel): Flow<Boolean> = repository.isFavorite(teamModel)
     override fun getFavorite(): LiveData<PagedList<TeamModel>> = repository.getFavorite()
     override fun insertFavorite(teamModel: TeamModel, state: Boolean) = repository.insertFavorite(teamModel,state)
+    override fun searchTeams(query: String): Flow<List<TeamModel>> = repository.searchTeams(query)
 }

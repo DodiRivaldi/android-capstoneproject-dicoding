@@ -1,5 +1,6 @@
 package com.dodi.core.data.repository.teams.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
@@ -13,4 +14,7 @@ interface TeamDao {
 
     @Delete
     fun delete(item : TeamEntity)
+
+    @Query("SELECT * FROM team  WHERE strTeam LIKE '%' || :query || '%'")
+    fun searchTeam(query: String): Flow<List<TeamEntity>>
 }

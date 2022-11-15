@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="empty_favorite">No Data</string>
-    <string name="desc_no_data">No data OK</string>
+    <string name="desc_no_data">Sorry, no data favorite</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="success_deleted_item_favorite">Success deleted favorite</string>

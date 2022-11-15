@@ -13,7 +13,6 @@ class FavoriteAdapter : BasePagedListAdapter<TeamModel, ItemTeamBinding>(DIFF_CA
     lateinit var viewModel: FavoriteViewModel
     lateinit var lifecycleOwner: LifecycleOwner
     var favoriteListener : ((teamModel : TeamModel, state : Boolean)-> Unit)? = null
-    var shareListner : ((teamModel : TeamModel)-> Unit)? = null
 
     companion object{
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TeamModel>(){
@@ -45,9 +44,6 @@ class FavoriteAdapter : BasePagedListAdapter<TeamModel, ItemTeamBinding>(DIFF_CA
                     setVariable(BR.isFavorite, state)
                     executePendingBindings()
                 }
-            }
-            binding.btnShare.setOnClickListener {
-                shareListner?.invoke(item)
             }
             binding.apply {
                 setVariable(BR.item,item)
