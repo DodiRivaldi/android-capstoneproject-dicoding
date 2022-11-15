@@ -1,9 +1,8 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.dynamic-feature'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
-    id 'androidx.navigation.safeargs.kotlin'
 }
 apply from: '../shared_dependencies.gradle'
 
@@ -12,31 +11,16 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.dodi.androidbaseproject"
+        applicationId "com.dodi.androidbaseproject.favorite"
         minSdkVersion 21
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            // applicationIdSuffix ".debug"
-            debuggable true
-        }
-
-    }
-    buildTypes.each {
-        it.buildConfigField 'String', 'BASE_URL', BASE_URL
-    }
-    buildFeatures {
+    buildFeatures{
         dataBinding true
         viewBinding true
     }
@@ -47,11 +31,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    dynamicFeatures = [':favorite']
+    lintOptions {
+        abortOnError false
+        disable 'IidCompatibilityCheckFailure'
+    }
 }
 
 dependencies {
-
     implementation project(":core")
+    implementation project(":app")
     implementation fileTree(dir: "libs", include: ["*.jar"])
 }

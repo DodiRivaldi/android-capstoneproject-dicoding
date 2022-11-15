@@ -9,4 +9,5 @@
     <string name="search">Search</string>
     <string name="background">Background</string>
     <string name="desc">Description</string>
+    <string name="title_favorite">Favorite</string>
 </resources>
