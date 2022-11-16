@@ -22,18 +22,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>({ ActivityDetailBindi
     lateinit var factory: ViewModelFactory
     private val viewModel: DetailViewModel by viewModels { factory }
 
-    companion object {
-        private const val EXTRA_DATA = "EXTRA_DATA"
-
-        fun navigate(activity: Activity, teamModel: TeamModel) {
-            Intent(activity, DetailActivity::class.java).apply {
-                putExtra(EXTRA_DATA, teamModel)
-            }.also {
-                activity.startActivity(it)
-            }
-        }
-    }
-
     @ExperimentalCoroutinesApi
     override fun ActivityDetailBinding.oncreate(savedInstanceState: Bundle?) {
         (application as MyApp).appComponent.inject(this@DetailActivity)
@@ -78,6 +66,18 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>({ ActivityDetailBindi
     override fun observerViewModel() {
         observe(viewModel.item) { binding.item = it }
         observe(viewModel.isFavorite, ::isFavorite)
+    }
+
+    companion object {
+        private const val EXTRA_DATA = "EXTRA_DATA"
+
+        fun navigate(activity: Activity, teamModel: TeamModel) {
+            Intent(activity, DetailActivity::class.java).apply {
+                putExtra(EXTRA_DATA, teamModel)
+            }.also {
+                activity.startActivity(it)
+            }
+        }
     }
 
 }

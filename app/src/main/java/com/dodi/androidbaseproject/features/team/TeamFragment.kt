@@ -92,14 +92,9 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>({ FragmentTeamBinding.inf
     }
 
     private fun handleSearch(teams: List<TeamModel>) {
-        Log.d("HASILNYA", teams.size.toString())
-
         if (!teams.isNullOrEmpty()) {
             adapter.submitList(teams)
-            Log.d("HASIL", teams.size.toString())
-
         } else {
-            Log.d("HASILKOSONG", teams.size.toString())
             requireContext().showToast(R.string.error_message.toString())
         }
     }

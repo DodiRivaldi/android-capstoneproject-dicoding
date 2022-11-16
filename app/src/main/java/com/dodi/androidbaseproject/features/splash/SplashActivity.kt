@@ -13,6 +13,7 @@ import com.dodi.core.abstraction.base.BaseActivity
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>({ ActivitySplashBinding.inflate(it) }) {
 
+    private val PENDING_DURATION : Long = 3000
     override fun ActivitySplashBinding.oncreate(savedInstanceState: Bundle?) {
         Glide.with(this@SplashActivity).load(R.drawable.ic_epl).into(binding.imgSplash)
 
@@ -20,18 +21,19 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>({ ActivitySplashBindi
         Handler(Looper.getMainLooper()).postDelayed({
             MainActivity.navigate(this@SplashActivity)
             finish()
-        }, 3000)
+        }, PENDING_DURATION)
     }
 
     override fun observerViewModel() {
     }
 
     private fun playAnimation() {
-        ObjectAnimator.ofFloat(binding.imgSplash, View.TRANSLATION_X, -30f, 30f).apply {
-            duration = 3000
+        ObjectAnimator.ofFloat(binding.imgSplash, View.TRANSLATION_Y, -30f, 30f).apply {
+            duration = PENDING_DURATION
             repeatCount = ObjectAnimator.INFINITE
             repeatMode = ObjectAnimator.REVERSE
         }.start()
     }
+
 
 }
