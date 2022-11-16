@@ -7,8 +7,8 @@ import com.dodi.core.data.repository.teams.remote.TeamResponse
 
 object TeamDataMapper {
 
-    fun mapTeamResponseToEntity(item : List<TeamResponse.TeamList>):
-            List<TeamEntity>{
+    fun mapTeamResponseToEntity(item: List<TeamResponse.TeamList>):
+            List<TeamEntity> {
         val itemList = ArrayList<TeamEntity>()
         item.map {
             val team = TeamEntity(
@@ -33,7 +33,7 @@ object TeamDataMapper {
         return itemList
     }
 
-    fun mapTeamEntityToDomain(item : List<TeamEntity>): List<TeamModel> =
+    fun mapTeamEntityToDomain(item: List<TeamEntity>): List<TeamModel> =
         item.map {
             TeamModel(
                 id = it.id,

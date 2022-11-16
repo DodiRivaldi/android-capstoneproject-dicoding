@@ -31,7 +31,8 @@ class TeamRepository @Inject constructor(
                 }
             }
 
-            override fun shouldFetch(data: List<TeamModel>?): Boolean = data == null || data.isEmpty()
+            override fun shouldFetch(data: List<TeamModel>?): Boolean =
+                data == null || data.isEmpty()
 
             override suspend fun createCall(): Flow<ApiResponse<List<TeamResponse.TeamList>>> =
                 remoteDataSource.getTeams()
@@ -61,12 +62,12 @@ class TeamRepository @Inject constructor(
             .setPageSize(2)
             .build()
 
-        return LivePagedListBuilder(items,paged).build()
+        return LivePagedListBuilder(items, paged).build()
     }
 
     override fun insertFavorite(teamModel: TeamModel, state: Boolean) {
         val item = TeamDataMapper.mapDomainToFavoriteEntity(teamModel)
-        appExecutors.diskIO().execute { localDataSource.insertFavoriteTeam(item,state) }
+        appExecutors.diskIO().execute { localDataSource.insertFavoriteTeam(item, state) }
     }
 
     override fun searchTeams(query: String): Flow<List<TeamModel>> = flow {

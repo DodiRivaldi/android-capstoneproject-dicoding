@@ -11,20 +11,20 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RemoteDataSource @Inject constructor(private val apiService: ApiService){
+class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
 
-    suspend fun getTeams(): Flow<ApiResponse<List<TeamResponse.TeamList>>>{
+    suspend fun getTeams(): Flow<ApiResponse<List<TeamResponse.TeamList>>> {
         return flow {
             try {
                 val response = apiService.getTeams()
                 val dataArray = response.teamList
 
-                if (dataArray?.isNotEmpty()){
+                if (dataArray?.isNotEmpty()) {
                     emit(ApiResponse.Success(response.teamList))
-                }else{
+                } else {
                     emit(ApiResponse.Empty)
                 }
-            }catch (e : Exception){
+            } catch (e: Exception) {
                 emit(ApiResponse.Error(e.localizedMessage))
             }
         }.flowOn(Dispatchers.IO)

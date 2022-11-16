@@ -17,7 +17,7 @@ abstract class BaseAdapter<T : Any, VB : ViewDataBinding>(diffUtil: DiffUtil.Ite
 
     abstract fun getLayout(): Int
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)= BaseViewHolder<VB> (
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BaseViewHolder<VB>(
         DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             getLayout(),
@@ -26,8 +26,8 @@ abstract class BaseAdapter<T : Any, VB : ViewDataBinding>(diffUtil: DiffUtil.Ite
         )
     )
 
-    companion object{
-        class BaseViewHolder<VB : ViewDataBinding>(val binding : VB) :
+    companion object {
+        class BaseViewHolder<VB : ViewDataBinding>(val binding: VB) :
             RecyclerView.ViewHolder(binding.root)
     }
 }

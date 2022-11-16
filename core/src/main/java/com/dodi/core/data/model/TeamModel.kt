@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class TeamModel (
+data class TeamModel(
     val id: String,
     val strTeam: String?,
     val strTeamShort: String?,
@@ -20,4 +20,4 @@ data class TeamModel (
     val strTeamJersey: String?,
     val strTeamLogo: String?,
     val strTeamBanner: String?
-): Parcelable
+) : Parcelable

@@ -11,11 +11,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @AppScope
 @Component(
     dependencies = [CoreComponent::class],
-    modules = [AppModule::class,ViewModelModule::class]
+    modules = [AppModule::class, ViewModelModule::class]
 )
 interface AppComponent {
     @Component.Factory
-    interface Factory{
+    interface Factory {
         fun create(coreComponent: CoreComponent): AppComponent
     }
 

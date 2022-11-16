@@ -10,14 +10,18 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LocalDataSource @Inject constructor(private val teamDao: TeamDao, private val favoriteDao: FavoriteDao) {
+class LocalDataSource @Inject constructor(
+    private val teamDao: TeamDao,
+    private val favoriteDao: FavoriteDao
+) {
     fun getTeams(): Flow<List<TeamEntity>> = teamDao.get()
-    suspend fun insertTeam(item : List<TeamEntity>) = teamDao.insert(item)
-    suspend fun isFavorite(item : FavoriteEntity): Boolean =  favoriteDao.isExist(item.id)
-    fun insertFavoriteTeam(team : FavoriteEntity, state : Boolean){
+    suspend fun insertTeam(item: List<TeamEntity>) = teamDao.insert(item)
+    suspend fun isFavorite(item: FavoriteEntity): Boolean = favoriteDao.isExist(item.id)
+    fun insertFavoriteTeam(team: FavoriteEntity, state: Boolean) {
         if (!state) favoriteDao.insert(team)
         else favoriteDao.delete(team)
     }
+
     fun getFavoriteTeam(): DataSource.Factory<Int, FavoriteEntity> = favoriteDao.get()
-    fun searchTeams(query : String): Flow<List<TeamEntity>> = teamDao.searchTeam(query)
+    fun searchTeams(query: String): Flow<List<TeamEntity>> = teamDao.searchTeam(query)
 }

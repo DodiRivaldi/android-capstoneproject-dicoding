@@ -5,7 +5,7 @@ import com.dodi.core.data.repository.teams.TeamRepository
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [NetworkModule::class,DatabaseModule::class])
+@Module(includes = [NetworkModule::class, DatabaseModule::class])
 abstract class RepositoryModule {
     @Suppress("unused")
     @Binds

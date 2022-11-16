@@ -8,11 +8,11 @@ import com.dodi.core.di.DaggerCoreComponent
 
 open class MyApp : Application() {
 
-    private val coreComponent : CoreComponent by lazy {
+    private val coreComponent: CoreComponent by lazy {
         DaggerCoreComponent.factory().create(applicationContext)
     }
 
-    val appComponent : AppComponent by lazy {
+    val appComponent: AppComponent by lazy {
         DaggerAppComponent.factory().create(coreComponent)
     }
 }

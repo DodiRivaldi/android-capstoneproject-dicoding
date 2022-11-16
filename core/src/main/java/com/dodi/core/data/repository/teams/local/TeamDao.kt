@@ -1,6 +1,5 @@
 package com.dodi.core.data.repository.teams.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
@@ -10,10 +9,10 @@ interface TeamDao {
     fun get(): Flow<List<TeamEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(item : List<TeamEntity>)
+    suspend fun insert(item: List<TeamEntity>)
 
     @Delete
-    fun delete(item : TeamEntity)
+    fun delete(item: TeamEntity)
 
     @Query("SELECT * FROM team  WHERE strTeam LIKE '%' || :query || '%'")
     fun searchTeam(query: String): Flow<List<TeamEntity>>

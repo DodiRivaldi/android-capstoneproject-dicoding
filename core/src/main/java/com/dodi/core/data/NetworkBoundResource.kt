@@ -6,15 +6,15 @@ import kotlinx.coroutines.flow.*
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
 
-    private var result : Flow<Resource<ResultType>> = flow {
+    private var result: Flow<Resource<ResultType>> = flow {
         emit(Resource.Loading())
         val dbSource = loadFromDb().first()
-        if (shouldFetch(dbSource)){
-            Log.d("CHECK","1")
+        if (shouldFetch(dbSource)) {
+            Log.d("CHECK", "1")
             emit(Resource.Loading())
-            when(val apiResponse = createCall().first()){
+            when (val apiResponse = createCall().first()) {
                 is ApiResponse.Success -> {
-                    Log.d("CHECK","2")
+                    Log.d("CHECK", "2")
 
                     saveCallResult(apiResponse.data)
                     emitAll(loadFromDb().map {
@@ -24,7 +24,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                     })
                 }
                 is ApiResponse.Empty -> {
-                    Log.d("CHECK","3")
+                    Log.d("CHECK", "3")
 
                     emitAll(loadFromDb().map {
                         Resource.Success(
@@ -33,17 +33,18 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                     })
                 }
                 is ApiResponse.Error -> {
-                    Log.d("CHECK","4")
+                    Log.d("CHECK", "4")
 
                     onFetchFailed()
-                    emit(Resource.Error<ResultType>(
-                        apiResponse.message
-                    ))
+                    emit(
+                        Resource.Error<ResultType>(
+                            apiResponse.message
+                        )
+                    )
                 }
             }
-        }
-        else{
-            Log.d("CHECK","5")
+        } else {
+            Log.d("CHECK", "5")
 
             emitAll(loadFromDb().map {
                 Resource.Success(it)
@@ -51,11 +52,11 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
         }
     }
 
-    protected open fun onFetchFailed(){}
+    protected open fun onFetchFailed() {}
 
     protected abstract fun loadFromDb(): Flow<ResultType>
 
-    protected abstract fun shouldFetch(data : ResultType?): Boolean
+    protected abstract fun shouldFetch(data: ResultType?): Boolean
 
     protected abstract suspend fun createCall(): Flow<ApiResponse<RequestType>>
 

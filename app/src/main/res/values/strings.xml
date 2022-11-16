@@ -10,4 +10,6 @@
     <string name="background">Background</string>
     <string name="desc">Description</string>
     <string name="title_favorite">Favorite</string>
+    <string name="favorited">Favorited!</string>
+    <string name="unfavorited">Unfavorited!</string>
 </resources>

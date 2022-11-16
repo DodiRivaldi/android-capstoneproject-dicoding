@@ -12,10 +12,10 @@ import com.dodi.core.databinding.ItemTeamBinding
 class FavoriteAdapter : BasePagedListAdapter<TeamModel, ItemTeamBinding>(DIFF_CALLBACK) {
     lateinit var viewModel: FavoriteViewModel
     lateinit var lifecycleOwner: LifecycleOwner
-    var favoriteListener : ((teamModel : TeamModel, state : Boolean)-> Unit)? = null
+    var favoriteListener: ((teamModel: TeamModel, state: Boolean) -> Unit)? = null
 
-    companion object{
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TeamModel>(){
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TeamModel>() {
             override fun areItemsTheSame(oldItem: TeamModel, newItem: TeamModel): Boolean {
                 return oldItem == newItem
             }
@@ -33,12 +33,12 @@ class FavoriteAdapter : BasePagedListAdapter<TeamModel, ItemTeamBinding>(DIFF_CA
         holder: BasePagedListAdapter.Companion.BaseViewHolder<ItemTeamBinding>,
         position: Int
     ) {
-       val item = getItem(position) ?: return
+        val item = getItem(position) ?: return
         holder.apply {
-            binding.root.setOnClickListener { listener?.invoke(it,position,item) }
-            lifecycleOwner.observe(viewModel.isFavorite(item)){ state->
+            binding.root.setOnClickListener { listener?.invoke(it, position, item) }
+            lifecycleOwner.observe(viewModel.isFavorite(item)) { state ->
                 binding.cbIsFav.setOnClickListener {
-                    favoriteListener?.invoke(item,state)
+                    favoriteListener?.invoke(item, state)
                 }
                 binding.apply {
                     setVariable(BR.isFavorite, state)
@@ -46,7 +46,7 @@ class FavoriteAdapter : BasePagedListAdapter<TeamModel, ItemTeamBinding>(DIFF_CA
                 }
             }
             binding.apply {
-                setVariable(BR.item,item)
+                setVariable(BR.item, item)
                 executePendingBindings()
             }
         }

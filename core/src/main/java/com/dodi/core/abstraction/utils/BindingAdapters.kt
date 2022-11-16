@@ -8,16 +8,16 @@ import com.dodi.core.R
 
 @BindingAdapter("app:imageUrl")
 fun setImageUrl(imageView: ImageView, imageUrl: String?) {
-  imageUrl?.let {
-    Glide.with(imageView.context)
+    imageUrl?.let {
+        Glide.with(imageView.context)
             .load(imageUrl)
             .placeholder(R.drawable.ic_loading)
             .error(R.drawable.ic_error)
             .into(imageView)
-  }
+    }
 }
 
 @BindingAdapter("app:isFavorite")
 fun setIsFavorite(checkBox: CheckBox, isFavorite: Boolean) {
-  checkBox.isChecked = isFavorite
+    checkBox.isChecked = isFavorite
 }

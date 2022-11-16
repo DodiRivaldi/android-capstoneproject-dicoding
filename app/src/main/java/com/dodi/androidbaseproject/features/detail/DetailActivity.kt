@@ -2,7 +2,6 @@ package com.dodi.androidbaseproject.features.detail
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -10,23 +9,25 @@ import com.dodi.androidbaseproject.MyApp
 import com.dodi.androidbaseproject.R
 import com.dodi.androidbaseproject.databinding.ActivityDetailBinding
 import com.dodi.androidbaseproject.features.ViewModelFactory
+import com.dodi.androidbaseproject.features.main.MainActivity
 import com.dodi.core.abstraction.base.BaseActivity
 import com.dodi.core.abstraction.utils.observe
+import com.dodi.core.abstraction.utils.showToast
 import com.dodi.core.data.model.TeamModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
-class DetailActivity : BaseActivity<ActivityDetailBinding>({ActivityDetailBinding.inflate(it)}) {
+class DetailActivity : BaseActivity<ActivityDetailBinding>({ ActivityDetailBinding.inflate(it) }) {
     @Inject
     lateinit var factory: ViewModelFactory
-    private val viewModel : DetailViewModel by viewModels { factory }
+    private val viewModel: DetailViewModel by viewModels { factory }
 
-    companion object{
+    companion object {
         private const val EXTRA_DATA = "EXTRA_DATA"
 
-        fun navigate(activity: Activity, teamModel: TeamModel){
+        fun navigate(activity: Activity, teamModel: TeamModel) {
             Intent(activity, DetailActivity::class.java).apply {
-                putExtra(EXTRA_DATA,teamModel)
+                putExtra(EXTRA_DATA, teamModel)
             }.also {
                 activity.startActivity(it)
             }
@@ -47,14 +48,24 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>({ActivityDetailBindin
         supportActionBar?.title = items?.strTeam
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        MainActivity.navigate(this)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        MainActivity.navigate(this)
         return true
     }
 
-    private fun isFavorite(state : Boolean){
+    private fun isFavorite(state: Boolean) {
         binding.fabFav.setOnClickListener {
             viewModel.insertFavorite(state)
+            if (!state) {
+                showToast(getString(R.string.favorited))
+            } else {
+                showToast(getString(R.string.unfavorited))
+            }
         }
         binding.fabFav.setImageDrawable(
             ContextCompat.getDrawable(
@@ -65,7 +76,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>({ActivityDetailBindin
     }
 
     override fun observerViewModel() {
-        observe(viewModel.item){binding.item = it}
+        observe(viewModel.item) { binding.item = it }
         observe(viewModel.isFavorite, ::isFavorite)
     }
 

@@ -13,6 +13,6 @@ import com.dodi.core.data.repository.teams.local.TeamEntity
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun teamDao() : TeamDao
+    abstract fun teamDao(): TeamDao
     abstract fun favoriteDao(): FavoriteDao
 }

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 data class TeamResponse(
-    @Expose @SerializedName("teams") val teamList : List<TeamList> = listOf()
+    @Expose @SerializedName("teams") val teamList: List<TeamList> = listOf()
 ) {
 
     @Parcelize
