@@ -13,7 +13,6 @@ import com.dodi.core.abstraction.base.BaseActivity
 
 class OpeningActivity : BaseActivity<ActivityOpeningBinding>({ ActivityOpeningBinding.inflate(it) }) {
 
-    private val PENDINGDURATION : Long = 3000
     override fun ActivityOpeningBinding.oncreate(savedInstanceState: Bundle?) {
         Glide.with(this@OpeningActivity).load(R.drawable.ic_epl).into(binding.imgSplash)
 
@@ -33,6 +32,10 @@ class OpeningActivity : BaseActivity<ActivityOpeningBinding>({ ActivityOpeningBi
             repeatCount = ObjectAnimator.INFINITE
             repeatMode = ObjectAnimator.REVERSE
         }.start()
+    }
+
+    companion object{
+        const val PENDINGDURATION : Long = 3000
     }
 
 
