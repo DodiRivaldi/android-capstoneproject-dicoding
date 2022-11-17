@@ -32,12 +32,21 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>({ FragmentTeamBinding.inf
             rvTeam.hasFixedSize()
             search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(p0: String?): Boolean {
-                    observe(viewModel.searchTeams(p0.toString()), ::handleSearch)
                     return true
                 }
 
                 override fun onQueryTextChange(p0: String?): Boolean {
-                    observe(viewModel.searchTeams(p0.toString()), ::handleSearch)
+                   // viewModel.search("%${p0.toString()}%")
+                    if (p0 != null){
+                        //viewModel.search("%${p0}%")
+                        lifecycleOwner?.let { it ->
+                            viewModel.customSearch(p0).observe(it) {items ->
+                                items.let {
+                                    adapter.submitList(items)
+                                }
+                            }
+                        }
+                    }
 
                     return true
                 }
@@ -59,9 +68,18 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>({ FragmentTeamBinding.inf
         }
     }
 
-
     override fun observeViewModel() {
         observe(viewModel.getTeamData(), ::handleteams)
+        /*viewModel.searchLiveData.observe(viewLifecycleOwner){
+           *//* if (it.isNotEmpty()){
+                adapter.submitList(it)
+            }else{
+                requireContext().showToast(R.string.error_message.toString())
+            }*//*
+            Log.d("HASIL",it.toString())
+        }*/
+
+
     }
 
     private fun handleteams(teams: Resource<List<TeamModel>>) {
@@ -92,6 +110,7 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>({ FragmentTeamBinding.inf
     }
 
     private fun handleSearch(teams: List<TeamModel>) {
+        Log.d("VALUE", teams.size.toString())
         if (!teams.isNullOrEmpty()) {
             adapter.submitList(teams)
         } else {

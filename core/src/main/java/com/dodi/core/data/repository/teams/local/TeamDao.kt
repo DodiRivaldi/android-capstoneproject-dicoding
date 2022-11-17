@@ -14,6 +14,8 @@ interface TeamDao {
     @Delete
     fun delete(item: TeamEntity)
 
-    @Query("SELECT * FROM team  WHERE strTeam LIKE '%' || :query || '%'")
+    //@Query("SELECT * FROM team  WHERE strTeam LIKE '%' || :query || '%'")
+    @Query("SELECT * FROM team WHERE strTeam LIKE :query ")
+    //@Query("SELECT * FROM team WHERE strTeam LIKE 'arsenal'")
     fun searchTeam(query: String): Flow<List<TeamEntity>>
 }
