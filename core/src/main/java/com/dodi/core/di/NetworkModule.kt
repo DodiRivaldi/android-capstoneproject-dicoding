@@ -4,6 +4,7 @@ import com.dodi.core.BuildConfig
 import com.dodi.core.data.network.ApiService
 import dagger.Module
 import dagger.Provides
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,13 +13,29 @@ import java.util.concurrent.TimeUnit
 
 @Module
 class NetworkModule {
-    @Provides
+   /* @Provides
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .writeTimeout(120, TimeUnit.SECONDS)
+            .build()
+    }*/
+
+    @Provides
+    fun provideOkHttpClient(): OkHttpClient {
+        val hostName = "thesportsdb.com"
+        val certificatePinner = CertificatePinner.Builder()
+            .add(hostName, "sha256/NnupxxWETrHvZNGEnih0b/uMtCHadqgOzzx/jlJnBKI=")
+            .add(hostName, "sha256/FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=")
+            .build()
+        return OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .connectTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(120, TimeUnit.SECONDS)
+            .writeTimeout(120, TimeUnit.SECONDS)
+            .certificatePinner(certificatePinner)
             .build()
     }
 
