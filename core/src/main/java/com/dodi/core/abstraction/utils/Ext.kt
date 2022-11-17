@@ -22,40 +22,9 @@ fun View.gone() {
     this.visibility = View.GONE
 }
 
-fun androidx.appcompat.widget.AppCompatImageView.load(id: Int) {
-    Glide.with(context).asBitmap()
-        .load(id)
-        .apply(RequestOptions())
-        .into(this)
-}
-
-fun androidx.appcompat.widget.AppCompatImageView.load(url: Bitmap) {
-    Glide.with(context)
-        .load(url)
-        .fitCenter()
-        .apply(RequestOptions())
-        .into(this)
-}
-
-fun androidx.appcompat.widget.AppCompatImageView.load(url: String) {
-    Glide.with(context).asBitmap()
-        .load(url)
-        .fitCenter()
-        .apply(RequestOptions())
-        .into(this)
-}
-
-fun androidx.appcompat.widget.AppCompatImageView.load(url: Uri?) {
-    Glide.with(context).asBitmap()
-        .load(url)
-        .fitCenter()
-        .apply(RequestOptions())
-        .into(this)
-}
 
 fun <T> LifecycleOwner.observe(liveData: LiveData<T>?, action: (t: T) -> Unit) {
-    liveData?.observe(this,
-        { it?.let { t -> action(t) } }
-    )
+    liveData?.observe(this
+    ) { it?.let { t -> action(t) } }
 }
 

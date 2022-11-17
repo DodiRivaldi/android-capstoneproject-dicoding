@@ -19,7 +19,6 @@ interface AppComponent {
         fun create(coreComponent: CoreComponent): AppComponent
     }
 
-    //inject setiap activity maupun fragment disini
     fun inject(activity: MainActivity)
     fun inject(fragment: TeamFragment)
     fun inject(activity: DetailActivity)

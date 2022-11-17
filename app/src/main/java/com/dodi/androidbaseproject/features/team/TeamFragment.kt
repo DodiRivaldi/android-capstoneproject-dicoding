@@ -70,14 +70,6 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>({ FragmentTeamBinding.inf
 
     override fun observeViewModel() {
         observe(viewModel.getTeamData(), ::handleteams)
-        /*viewModel.searchLiveData.observe(viewLifecycleOwner){
-           *//* if (it.isNotEmpty()){
-                adapter.submitList(it)
-            }else{
-                requireContext().showToast(R.string.error_message.toString())
-            }*//*
-            Log.d("HASIL",it.toString())
-        }*/
 
 
     }
@@ -109,14 +101,6 @@ class TeamFragment : BaseFragment<FragmentTeamBinding>({ FragmentTeamBinding.inf
         }
     }
 
-    private fun handleSearch(teams: List<TeamModel>) {
-        Log.d("VALUE", teams.size.toString())
-        if (!teams.isNullOrEmpty()) {
-            adapter.submitList(teams)
-        } else {
-            requireContext().showToast(R.string.error_message.toString())
-        }
-    }
 
     @ExperimentalCoroutinesApi
     override fun onAttach(context: Context) {

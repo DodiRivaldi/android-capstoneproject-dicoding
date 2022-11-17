@@ -5,12 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.splash.SplashActivity">
+    tools:context=".features.splash.OpeningActivity">
 
     <ImageView
         android:id="@+id/img_splash"
         android:layout_width="300dp"
         android:layout_height="200dp"
+        android:contentDescription="@string/icon_pl"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

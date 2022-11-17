@@ -19,7 +19,7 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
                 val response = apiService.getTeams()
                 val dataArray = response.teamList
 
-                if (dataArray?.isNotEmpty()) {
+                if (dataArray.isNotEmpty()) {
                     emit(ApiResponse.Success(response.teamList))
                 } else {
                     emit(ApiResponse.Empty)
