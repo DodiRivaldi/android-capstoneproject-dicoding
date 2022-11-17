@@ -1,3 +1,5 @@
+[![DodiRivaldi](https://circleci.com/gh/DodiRivaldi/android-capstoneproject-dicoding.svg?style=svg)](https://circleci.com/gh/DodiRivaldi/android-capstoneproject-dicoding)
+
 #Tech Stack
 
 - Kotlin
@@ -9,3 +11,4 @@
 - Glide as Image loader
 - Paging
 - Modularization
+
